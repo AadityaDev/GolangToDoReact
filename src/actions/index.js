@@ -28,7 +28,7 @@ export const editTodo = (id, text) => {
   return dispatch => {
     return superagent
       .patch(`${API_ROOT}/updateTodo/${id}`)
-      .send({ Description: text })
+      .send(JSON.stringify({ Description: text }))
       .end((err, res) => dispatch({ type: types.EDIT_TODO, Id: id, Description: text }))
   }
 }
@@ -39,7 +39,7 @@ export const completeTodo = (id, state) => {
   return dispatch => {
     return superagent
       .patch(`${API_ROOT}/updateTodo/${id}`)
-      .send({ Completed: state })
+      .send(JSON.stringify({ Completed: state }))
       .end((err, res) => dispatch({ type: types.COMPLETE_TODO, Id: id, Completed: state }))
   }
 }
@@ -53,8 +53,6 @@ export const getTodos = () => {
         if (err)
           dispatch({ type: types.GET_TODOS, data: [] })
         else
-          console.log(`res is: ${res}`);
-          console.log(`res.body is: ${res.body}`);
           // console.log(`res.body is: ${res.body?.data}`);
           dispatch({ type: types.GET_TODOS, data: res.body })
       })
@@ -70,7 +68,7 @@ export const completeAll = items => {
       return new Promise((resolve, reject) => {
         superagent
           .patch(`${API_ROOT}/updateTodo/${item.id}`)
-          .send({ Completed: item.Completed })
+          .send(JSON.stringify({ Completed: item.Completed }))
           .end((err, res) => resolve())
       })
     })
