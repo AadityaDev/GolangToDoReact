@@ -1,17 +1,12 @@
-# gokit-todo TodoMVC Example
-
-![GitHub Workflow Status](https://github.com/cage1016/gokit-todo-frontend/workflows/ci/badge.svg)
-
-This is a sample project how to use [cage1016/gokit-todo](https://github.com/cage1016/gokit-todo) as a generic Back End for any prototype or any Front End that needs a simple Back End.
-
-This is a modified version of original [ttu/todomvc-fake-server: Redux TodoMVC example converted to use Fake JSON Server as a Back End](https://github.com/ttu/todomvc-fake-server).
+# GolangToDoReact TodoMVC Example
 
 ## Get started
 
 1. Clone source code from github
     ```
-    git clone https://github.com/cage1016/gokit-todo-frontend.git
-    cd gokit-todo-frontend
+    git clone https://github.com/AadityaDev/GolangToDoReact
+    cd GolangToDoReact
+
     ```
 2. Prepare backend api
     ```sh
@@ -53,7 +48,8 @@ This is a modified version of original [ttu/todomvc-fake-server: Redux TodoMVC e
     ```
 3. Start frontend
     ```
-    yarn && yarn start
+    npm install
+    npm run start
     ```
 4. Open [http://localhost:3000](http://localhost:3000)
 5. Clear backend API
