@@ -79,17 +79,17 @@ describe('components', () => {
       expect(props.onShow).toBeCalledWith(SHOW_ACTIVE)
     })
 
-    it('shouldnt show clear button when no completed todos', () => {
+    it('shouldnt show clear button when no Completed todos', () => {
       const { output } = setup({ completedCount: 0 })
       const [ , , clear ] = output.props.children
       expect(clear).toBe(undefined)
     })
 
-    it('should render clear button when completed todos', () => {
+    it('should render clear button when Completed todos', () => {
       const { output } = setup({ completedCount: 1 })
       const [ , , clear ] = output.props.children
       expect(clear.type).toBe('button')
-      expect(clear.props.children).toBe('Clear completed')
+      expect(clear.props.children).toBe('Clear Completed')
     })
 
     it('should call onClearCompleted on clear button click', () => {

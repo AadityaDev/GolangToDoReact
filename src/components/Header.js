@@ -4,16 +4,23 @@ import TodoTextInput from './TodoTextInput'
 
 export default class Header extends Component {
   static propTypes = {
-    addTodo: PropTypes.func.isRequired
+    addTodo: PropTypes.func.isRequired,
+    actions: PropTypes.object.isRequired
   }
+
+  // componentDidMount() {
+  //   this.props.actions.getTodos()
+  // }
 
   handleSave = text => {
     if (text.length !== 0) {
       this.props.addTodo(text)
+      this.props.actions.getTodos()
     }
   }
 
   render() {
+    const { todos, actions } = this.props
     return (
       <header className="header">
         <h1>todos</h1>

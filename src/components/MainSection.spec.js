@@ -9,13 +9,13 @@ const setup = propOverrides => {
   const props = Object.assign({
     todos: [
       {
-        text: 'Use Redux',
-        completed: false,
-        id: 0
+        Description: 'Use Redux',
+        Completed: false,
+        Id: 0
       }, {
-        text: 'Run the tests',
-        completed: true,
-        id: 1
+        Description: 'Run the tests',
+        Completed: true,
+        Id: 1
       }
     ],
     actions: {
@@ -55,12 +55,12 @@ describe('components', () => {
         expect(toggle.props.checked).toBe(false)
       })
 
-      it('should be checked if all todos completed', () => {
+      it('should be checked if all todos Completed', () => {
         const { output } = setup({ todos: [
           {
-            text: 'Use Redux',
-            completed: true,
-            id: 0
+            Description: 'Use Redux',
+            Completed: true,
+            Id: 0
           }
         ]
         })

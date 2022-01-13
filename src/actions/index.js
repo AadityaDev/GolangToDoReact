@@ -3,13 +3,13 @@ import superagent from 'superagent'
 import { API_ROOT } from '../constants/host'
 
 // export const addTodo = text => ({ type: types.ADD_TODO, text })
-export const addTodo = text => {
+export const addTodo = Description => {
   return dispatch => {
     return superagent
       .post(`${API_ROOT}/createTodo`)
-      .send({ text: text, completed: false })
+      .send(JSON.stringify({ Description: Description, Completed: false }))
       .end((err, res) => {
-        dispatch({ type: types.ADD_TODO, id: res.body.data.id, text: text, completed: false })
+        dispatch({ type: types.ADD_TODO, Description: Description, Completed: false })
       })
   }
 }
@@ -28,8 +28,8 @@ export const editTodo = (id, text) => {
   return dispatch => {
     return superagent
       .patch(`${API_ROOT}/updateTodo/${id}`)
-      .send({ text: text })
-      .end((err, res) => dispatch({ type: types.EDIT_TODO, id: id, text: text }))
+      .send({ Description: text })
+      .end((err, res) => dispatch({ type: types.EDIT_TODO, Id: id, Description: text }))
   }
 }
 
@@ -39,8 +39,8 @@ export const completeTodo = (id, state) => {
   return dispatch => {
     return superagent
       .patch(`${API_ROOT}/updateTodo/${id}`)
-      .send({ completed: state })
-      .end((err, res) => dispatch({ type: types.COMPLETE_TODO, id: id, completed: state }))
+      .send({ Completed: state })
+      .end((err, res) => dispatch({ type: types.COMPLETE_TODO, Id: id, Completed: state }))
   }
 }
 
@@ -70,7 +70,7 @@ export const completeAll = items => {
       return new Promise((resolve, reject) => {
         superagent
           .patch(`${API_ROOT}/updateTodo/${item.id}`)
-          .send({ completed: item.completed })
+          .send({ Completed: item.Completed })
           .end((err, res) => resolve())
       })
     })

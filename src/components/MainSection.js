@@ -6,8 +6,8 @@ import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../constants/TodoFilters'
 
 const TODO_FILTERS = {
   [SHOW_ALL]: () => true,
-  [SHOW_ACTIVE]: todo => !todo.completed,
-  [SHOW_COMPLETED]: todo => todo.completed
+  [SHOW_ACTIVE]: todo => !todo.Completed,
+  [SHOW_COMPLETED]: todo => todo.Completed
 }
 
 export default class MainSection extends Component {
@@ -44,11 +44,11 @@ export default class MainSection extends Component {
             type="checkbox"
             checked={completedCount === todos.length}
             onChange={() => {
-              const NonCompleted = todos.filter(e => !e.completed).map(e => e.Id)
+              const NonCompleted = todos.filter(e => !e.Completed).map(e => e.Id)
               if (NonCompleted.length > 0) {
-                actions.completeAll(NonCompleted.map(e => ({ id: e, completed: true })))
+                actions.completeAll(NonCompleted.map(e => ({ id: e, Completed: true })))
               } else {
-                actions.completeAll(todos.map(e => ({ id: e.Id, completed: !e.completed })))
+                actions.completeAll(todos.map(e => ({ id: e.Id, Completed: !e.Completed })))
               }
 
             }} />
@@ -71,7 +71,7 @@ export default class MainSection extends Component {
           activeCount={activeCount}
           filter={filter}
           //onClearCompleted={this.handleClearCompleted}                
-          onClearCompleted={() => this.handleClearCompleted(todos.filter(e => e.completed).map(e => e.Id))}
+          onClearCompleted={() => this.handleClearCompleted(todos.filter(e => e.Completed).map(e => e.Id))}
           onShow={this.handleShow} />
       )
     }
@@ -83,7 +83,7 @@ export default class MainSection extends Component {
 
     const filteredTodos = todos.filter(TODO_FILTERS[filter])
     const completedCount = todos.reduce((count, todo) =>
-      todo.completed ? count + 1 : count,
+      todo.Completed ? count + 1 : count,
       0
     )
 

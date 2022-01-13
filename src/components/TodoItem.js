@@ -57,7 +57,7 @@ export default class TodoItem extends Component {
 
     return (
       <li className={classnames({
-        completed: todo.Completed,
+        Completed: todo.Completed,
         editing: this.state.editing
       })}>
         {element}

@@ -5,7 +5,7 @@ import { ADD_TODO, DELETE_TODO, EDIT_TODO, COMPLETE_TODO, COMPLETE_ALL, CLEAR_CO
 const initialState = [
   // {
   //   text: 'Use Redux',
-  //   completed: false,
+  //   Completed: false,
   //   id: 0
   // }
 ]
@@ -22,7 +22,7 @@ export default function todos(state = initialState, action) {
           // Id will come with action payload
           // id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
           Id: action.id,
-          Completed: action.completed,
+          Completed: action.Completed,
           Description: action.text
         },
         ...state
@@ -43,21 +43,21 @@ export default function todos(state = initialState, action) {
     case COMPLETE_TODO:
       return state.map(todo =>
         todo.id === action.id ?
-          // No more toggling, completed state comes with action payload
-          // { ...todo, completed: !todo.completed } :
-          { ...todo, Completed: action.completed } :          
+          // No more toggling, Completed state comes with action payload
+          // { ...todo, Completed: !todo.Completed } :
+          { ...todo, Completed: action.Completed } :          
           todo
       )
 
     case COMPLETE_ALL:
-      const areAllMarked = state.every(todo => todo.completed)
+      const areAllMarked = state.every(todo => todo.Completed)
       return state.map(todo => ({
         ...todo,
-        completed: !areAllMarked
+        Completed: !areAllMarked
       }))
 
     case CLEAR_COMPLETED:
-      return state.filter(todo => todo.completed === false)
+      return state.filter(todo => todo.Completed === false)
 
     default:
       return state

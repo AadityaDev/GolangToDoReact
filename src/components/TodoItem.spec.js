@@ -8,7 +8,7 @@ const setup = ( editing = false ) => {
     todo: {
       id: 0,
       text: 'Use Redux',
-      completed: false
+      Completed: false
     },
     editTodo: jest.fn(),
     deleteTodo: jest.fn(),
