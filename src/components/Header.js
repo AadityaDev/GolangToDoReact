@@ -5,6 +5,7 @@ import TodoTextInput from './TodoTextInput'
 export default class Header extends Component {
   static propTypes = {
     addTodo: PropTypes.func.isRequired,
+    todos: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired
   }
 
@@ -14,8 +15,8 @@ export default class Header extends Component {
 
   handleSave = text => {
     if (text.length !== 0) {
-      this.props.addTodo(text)
-      this.props.actions.getTodos()
+      this.props.addTodo(text, this.props.todos.length)
+      window.location.reload();
     }
   }
 

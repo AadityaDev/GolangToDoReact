@@ -3,13 +3,13 @@ import superagent from 'superagent'
 import { API_ROOT } from '../constants/host'
 
 // export const addTodo = text => ({ type: types.ADD_TODO, text })
-export const addTodo = Description => {
+export const addTodo = (Description, Id) => {
   return dispatch => {
     return superagent
       .post(`${API_ROOT}/createTodo`)
       .send(JSON.stringify({ Description: Description, Completed: false }))
       .end((err, res) => {
-        dispatch({ type: types.ADD_TODO, Description: Description, Completed: false })
+        dispatch({ type: types.ADD_TODO, Id: Id, Description: Description, Completed: false })
       })
   }
 }
@@ -18,7 +18,8 @@ export const addTodo = Description => {
 export const deleteTodo = id => {
   return dispatch => {
     return superagent
-      .delete(`${API_ROOT}/updateTodo/${id}`)
+      .put(`${API_ROOT}/updateTodo?id=${id}`)
+      .send(JSON.stringify({ Completed: true }))
       .end((err, res) => dispatch({ type: types.DELETE_TODO, id }))
   }
 }
@@ -27,7 +28,7 @@ export const deleteTodo = id => {
 export const editTodo = (id, text) => {
   return dispatch => {
     return superagent
-      .patch(`${API_ROOT}/updateTodo/${id}`)
+      .put(`${API_ROOT}/updateTodo?id=${id}`)
       .send(JSON.stringify({ Description: text }))
       .end((err, res) => dispatch({ type: types.EDIT_TODO, Id: id, Description: text }))
   }
@@ -38,7 +39,7 @@ export const editTodo = (id, text) => {
 export const completeTodo = (id, state) => {
   return dispatch => {
     return superagent
-      .patch(`${API_ROOT}/updateTodo/${id}`)
+      .put(`${API_ROOT}/updateTodo?id=${id}`)
       .send(JSON.stringify({ Completed: state }))
       .end((err, res) => dispatch({ type: types.COMPLETE_TODO, Id: id, Completed: state }))
   }
@@ -67,7 +68,7 @@ export const completeAll = items => {
     var promises = items.map(item => {
       return new Promise((resolve, reject) => {
         superagent
-          .patch(`${API_ROOT}/updateTodo/${item.id}`)
+          .put(`${API_ROOT}/updateTodo?id=${item.id}`)
           .send(JSON.stringify({ Completed: item.Completed }))
           .end((err, res) => resolve())
       })
@@ -82,7 +83,8 @@ export const clearCompleted = ids => {
     var promises = ids.map(id => {
       return new Promise((resolve, reject) => {
         superagent
-          .delete(`${API_ROOT}/updateTodo/${id}`)
+          .put(`${API_ROOT}/updateTodo?id=${id}`)
+          .send(JSON.stringify({ Completed: true }))
           .end((err, res) => resolve())
       })
     })

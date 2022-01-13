@@ -8,7 +8,7 @@ import * as TodoActions from '../actions'
 
 const App = ({todos, actions}) => (
   <div>
-    <Header addTodo={actions.addTodo} />
+    <Header addTodo={actions.addTodo} todos={todos} actions={actions}/>
     <MainSection todos={todos} actions={actions} />
   </div>
 )
