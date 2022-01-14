@@ -16,6 +16,7 @@ export const addTodo = (Description, Id) => {
 
 // export const deleteTodo = id => ({ type: types.DELETE_TODO, id })
 export const deleteTodo = id => {
+  console.log(`in delete todo`);
   return dispatch => {
     return superagent
       .put(`${API_ROOT}/updateTodo?id=${id}`)
@@ -26,6 +27,7 @@ export const deleteTodo = id => {
 
 // export const editTodo = (id, text) => ({ type: types.EDIT_TODO, id, text })
 export const editTodo = (id, text) => {
+  console.log(`in edit todo`);
   return dispatch => {
     return superagent
       .put(`${API_ROOT}/updateTodo?id=${id}`)
@@ -37,11 +39,14 @@ export const editTodo = (id, text) => {
 // Before click just toggled the state, now we need to pass correct state to back end
 // export const completeTodo = id => ({ type: types.COMPLETE_TODO, id })
 export const completeTodo = (id, state) => {
+  console.log(`in complete todo`);
   return dispatch => {
     return superagent
       .put(`${API_ROOT}/updateTodo?id=${id}`)
-      .send(JSON.stringify({ Completed: state }))
-      .end((err, res) => dispatch({ type: types.COMPLETE_TODO, Id: id, Completed: state }))
+      .send({ Id: id, Completed: state })
+      .end((err, res) => {
+        this.getTodos()
+        dispatch({ type: types.COMPLETE_TODO, Id: id, Completed: state })})
   }
 }
 
@@ -65,6 +70,7 @@ export const getTodos = () => {
 // export const completeAll = () => ({ type: types.COMPLETE_ALL })
 export const completeAll = items => {
   return dispatch => {
+    console.log(`in complete all todo`);
     var promises = items.map(item => {
       return new Promise((resolve, reject) => {
         superagent
@@ -80,6 +86,7 @@ export const completeAll = items => {
 // export const clearCompleted = () => ({ type: types.CLEAR_COMPLETED })
 export const clearCompleted = ids => {
   return dispatch => {
+    console.log(`clear completed todo`);
     var promises = ids.map(id => {
       return new Promise((resolve, reject) => {
         superagent
